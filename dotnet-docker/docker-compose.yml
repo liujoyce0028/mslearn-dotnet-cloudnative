@@ -1,0 +1,24 @@
+version: '3.4'
+
+
+# It creates the front-end website and names it frontend.
+# The code sets an environment variable for the website: ProductEndpoint=http://backend:8080. 
+# This code is how the front-end service finds the Products back-end service.
+# The code opens a port and declares that it depends on the back-end service.
+# The back-end service named backend is created next.
+# The last command specifies which port to open.
+
+services: 
+
+    frontend:
+        image: store:latest
+        environment: 
+            - ProductEndpoint=http://backend:8080
+        ports:
+            - "32000:8080"
+        depends_on: 
+            - backend
+    backend:
+        image: products:latest
+        ports: 
+            - "32001:8080"
